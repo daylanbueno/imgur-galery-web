@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState }  from "react";
+import { api } from "./services/api";
+
+
 
 function App() {
+   const [galery, setGalery] = useState([])
+   function findGalery() {
+    api.get(`/3/gallery/hot/top/all?showViral=true&mature=true&album_previews=true`)
+    .then((response) => {
+      setGalery(response.data.data)
+      console.log(response.data.data)
+    }).catch((err) => {
+      console.error("fail", err)
+    })
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <button onClick={() => findGalery()}>LET'S GO</button>
+
+      <div>
+      {
+        galery.map((it) => 
+        <div> 
+          <img key={it.id}  width={200} src={it.link} alt={it.title} />
+          <p>{it.link}</p>
+        </div>)
+      }
+      </div>
+ 
+    </>
   );
 }
 
