@@ -8,7 +8,7 @@ export default function CardImage({ image , title, animated }) {
         <div className='card'>
             {
                animated ? (
-                <video muted draggable={false} autoplay className='image' controls>
+                <video muted draggable={false} autoPlay className='image' controls>
                    <source type="video/mp4" src={image}/>
                 </video>
                ) 
