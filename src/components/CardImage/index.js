@@ -3,7 +3,7 @@ import React from 'react'
 import './styles.css'
 
 
-export default function CardImage({ image , title, animated, type }) {
+export default function CardImage({ image , title, animated }) {
     return (
         <div className='card'>
             {
@@ -14,7 +14,8 @@ export default function CardImage({ image , title, animated, type }) {
                ) 
                : <img className='image' src={image} alt={title} />
             }
-            <h1>OLA MUNDO</h1>
+            <h3>{title}</h3>
+            <button>See more</button>
         </div>
     )
 }

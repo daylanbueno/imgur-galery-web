@@ -2,4 +2,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    background-color: #2e3035;
+    margin: 20px;
 }

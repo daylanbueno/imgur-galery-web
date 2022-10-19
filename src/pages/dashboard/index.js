@@ -35,7 +35,6 @@ export default function  Dashboard() {
                 type={galery.images[0].type}
                 animated={galery.images[0].animated}
             />
-            <hr/>
         </div>
        )
       })}
