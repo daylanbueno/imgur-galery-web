@@ -5,6 +5,7 @@
     flex-direction: column;
     border-radius: 8px;
     gap: 4px;
+    padding: 20px;
 }
 
 .image {

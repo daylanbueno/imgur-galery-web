@@ -7,7 +7,6 @@ export default function AppRoutes () {
     <BrowserRouter>
       <Routes>
         <Route index exact path="/" element={<Dashboard />} />
-        <Route  path="/images" element={<h1> images</h1>} />
       </Routes>
     </BrowserRouter>
     )

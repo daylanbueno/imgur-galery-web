@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import Galery from "../../components/Galery";
+import Galery from "../../components/galery";
 import { api } from "../../services/api";
 
 import './styles.css'
 
 export default function  Dashboard() {
-    const [listGalery, setListGalery] = useState([])
+    const [galleries, setGalleries] = useState([])
     const [section, setSection] = useState('hot')
     const [sort, setSort] = useState('viral')
     const [window, setWindow] = useState('day')
@@ -13,8 +13,7 @@ export default function  Dashboard() {
     const handleFindGalerys = () => {
         api.get(`/3/gallery/${section}/${sort}/${window}`)
         .then((response) => {
-            setListGalery(response.data.data)
-            console.log(response.data.data)
+            setGalleries(response.data.data)
         }).catch((err) => {
             console.error("fail", err)
         })
@@ -39,7 +38,7 @@ export default function  Dashboard() {
    return (
     <>
     <header>
-        <h1>Galery</h1>
+        <h1>Imgur image gallery</h1>
         
         <div className="select-section">
             <div className="select-card">
@@ -74,7 +73,7 @@ export default function  Dashboard() {
     
       <main>
         <div className="container-images">
-            {listGalery.map((galery) => {
+            {galleries.map((galery) => {
                 return (
                     <Galery 
                         key={galery.id}

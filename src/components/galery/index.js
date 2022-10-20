@@ -1,10 +1,9 @@
 import React from "react";
-import CardImage from "../CardImage";
+import CardImage from "../cardImage";
 
 export default function Galery({images}) {
     return (
         <>
-        { console.log(images)}
         {
            
            images && images.map((image) => {
