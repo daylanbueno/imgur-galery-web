@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import CardImage from "../../components/CardImage";
+import Galery from "../../components/Galery";
 import { api } from "../../services/api";
 
 import './styles.css'
@@ -7,9 +7,11 @@ import './styles.css'
 export default function  Dashboard() {
     const [listGalery, setListGalery] = useState([])
     const [section, setSection] = useState('hot')
+    const [sort, setSort] = useState('viral')
+    const [window, setWindow] = useState('day')
 
     const handleFindGalerys = () => {
-        api.get(`/3/gallery/hot/top/all?showViral=true&mature=true`)
+        api.get(`/3/gallery/${section}/${sort}/${window}`)
         .then((response) => {
             setListGalery(response.data.data)
             console.log(response.data.data)
@@ -18,41 +20,73 @@ export default function  Dashboard() {
         })
     } 
     
+    useEffect(() => {
+        handleFindGalerys()
+    },[section])
 
-    function handle(e) {
-        console.log(e, 'asdfasdf')
-    }
+    useEffect(() => {
+        handleFindGalerys()
+    },[sort])
+
+    useEffect(() => {
+        handleFindGalerys()
+    },[window])
+
     useEffect(() => {
         handleFindGalerys()
     },[])
 
    return (
     <>
-      <h1>Galery</h1>
-      {section}
-      <div>
-        <select value={section} onChange={e => handle(e.target.value)} name="section">
-            <option value="hot">Hot</option>
-            <option value="top">Top</option>
-            <option value="user">User</option>
-        </select>
-        <button>Search</button>
-      </div>
-      <div className="container" >
-      {listGalery.map((galery) => {
-        return (
-        <div>
-            <CardImage 
-                key={galery.id}
-                image={galery.images[0].link}
-                title={galery.title}
-                type={galery.images[0].type}
-                animated={galery.images[0].animated}
-            />
+    <header>
+        <h1>Galery</h1>
+        
+        <div className="select-section">
+            <div className="select-card">
+                <label>Select section</label>
+                <select value={section} onChange={e => setSection(e.target.value)} name="section">
+                    <option value="hot">Hot</option>
+                    <option value="top">Top</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+            <div className="select-card">
+                <label>Select sort</label>
+                <select value={sort} onChange={e => setSort(e.target.value)} name="sort">
+                    <option value="viral">viral</option>
+                    <option value="top">top</option>
+                    <option value="user">rising</option>
+                </select>
+            </div>
+
+            <div className="select-card">
+                <label>Select window</label>
+                <select value={window} onChange={e => setWindow(e.target.value)} name="window">
+                    <option value="day">day</option>
+                    <option value="week">week</option>
+                    <option value="month">month</option>
+                    <option value="year">year</option>
+                    <option value="all">all</option>
+                </select>
+            </div>
         </div>
-       )
-      })}
-    </div>
+    </header>
+    
+      <main>
+        <div className="container-images">
+            {listGalery.map((galery) => {
+                return (
+                    <Galery 
+                        key={galery.id}
+                        title={galery.title}
+                        images={galery.images}
+                    />
+            )
+            })}
+        </div>
+      </main>
+
+      
     </>
    )
 }

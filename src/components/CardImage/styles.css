@@ -1,15 +1,29 @@
-.card {
+.card-image  {
+    border: 10px solid #4CB2E6;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
+    border-radius: 8px;
+    gap: 4px;
 }
 
 .image {
     width: 100%;
     height: 100%;
-    border:  10px solid #f0f0;
+    max-width: 200px;
+    max-height: 200px;
+  
+}
+
+.description {
+    max-width: 200px;;
 }
 
 h3 {
     color: azure
+}
+
+p {
+    margin: 10px;
+    font-size: 18px;
 }
